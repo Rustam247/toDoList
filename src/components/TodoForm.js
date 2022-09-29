@@ -56,29 +56,30 @@ const TodoForm = () => {
     };
     
     return (
-        <div>
-            <div>
+        <div id="container">
+            <div id="submit">
+                <h3>What to do</h3>
                 <form onSubmit={addItem}>
-                    <input id="inputtoList" type="text" placeholder="Enter your" value={input} onChange={(e) => setInput(e.target.value)} required/>
-                    <button onClick={validateInput}>Add</button>
+                    <input id="inputtoList" type="text" placeholder="What to do" value={input} onChange={(e) => setInput(e.target.value)} required/>
+                    <button id="btn-add" onClick={validateInput}>Add</button>
                 </form>
+                {list.map((item, index) => {
+                    return <p>
+                        * {item} 
+                        <button id="btn-delet" onClick={() => deleteItem(index)}>Delete</button>
+                        <button id ="btn-complete" onClick={completeItem}>Complete</button>
+                        </p>
+                })}
             </div>
-            {list.map((item, index) => {
-                return <p>
-                    * {item} 
-                    <button onClick={() => deleteItem(index)}>Delete</button>
-                    <button id ="completeButton" onClick={completeItem}>Complete</button>
-                    </p>
-            })}
             <div>
-                <h1>Complete Tasks</h1>
+                <h3>Complete Tasks</h3>
                 {list2.map((item, index) => {
                 return(
-                    <div key={item} onClick={() => completeItem(index)}>
-                        <p key={item} onClick={crossOutItem}>{item} </p>
+                    <div key={item}>
+                        <p key={item} onClick={crossOutItem}>{item}</p>
                     </div>
                 )})}
-                <button button id = "clearList" onClick={deleteArray}>Clear Complete</button>
+                <button id = "btn-deletAll" onClick={deleteArray}>Clear Complete</button>
             </div>
         </div>
         
